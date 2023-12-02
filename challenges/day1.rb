@@ -1,4 +1,4 @@
-url = "../files/day1.txt"
+url = "./files/day1.txt"
 data = File.open(url).read
 
 def calibration(data)
