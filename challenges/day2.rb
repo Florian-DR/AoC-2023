@@ -32,6 +32,11 @@ class Game
         @possible = false if green > GREEN
     end
 
+    # Only needed for Second part
+    def power
+        @green * @bleu * @red
+    end
+
     private 
 
     def filter(array)
@@ -48,7 +53,7 @@ class Game
     end
 end
 
-
+# First part of the puzzle
 def possible_games(data)
     games = {}
     
@@ -66,4 +71,23 @@ def possible_games(data)
     sum
 end
 
-p possible_games(data)
+# Second part of the puzzle
+def possible_games_2(data)
+    games = {}
+    
+    data.split("\n").each do |game| 
+        game_array = game.gsub("Game ", "").split(": ")
+        games[game_array[0]] = game_array[1].gsub(", ", "-").gsub(" ", "-").gsub("; ", "-").gsub(";", "").split("-")
+    end
+    gamesssss = games.map do |game|
+        Game.new(game[0].to_i, game[1])
+    end
+    sum = 0
+    gamesssss.each do |game|
+        sum += game.power
+    end
+    sum
+end
+
+# possible_games(data)
+p possible_games_2(data)
